@@ -48,7 +48,7 @@ def get_tablerows_old(table, series_label = "7"):
 def main():
     # Parse individual Series pages
     series_list = [2, 3, 5, 6, 9, 10, 12, 13]
-    all_rows = [[""]]
+    all_rows = [["Series", "Episode", "AirDate", "Chaser", "Contribution", "Result"]]
     for s in series_list:
         all_rows += get_tablerows( "https://the-chase.fandom.com/wiki/Series_{}".format(s), series_label = s)
     with open('data/newformat_chase.csv', 'wb') as csvfile:
@@ -56,7 +56,7 @@ def main():
         writer.writerows(all_rows)
 
     # Parse Many Page URL
-    all_rows = [[""]]
+    all_rows = [["Series", "Episode", "AirDate", "Chaser", "P1", "P2", "P3", "P4", "Result"]]
     URL = "https://the-chase.fandom.com/wiki/The_Chase_(List_of_Issues)#Series_1_-_June_29.2C_2009_-_July_10.2C_2009_-_10_Episodes"
     soup = BeautifulSoup(urlopen(URL),features="html.parser")
     all_rows += get_tablerows_old( soup.findAll("table", id="collapsibleTable1")[1], series_label = "7")
